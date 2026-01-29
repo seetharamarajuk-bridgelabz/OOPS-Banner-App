@@ -1,95 +1,62 @@
 package org.example;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * OOPSBannerApp UC7 - Store Character Pattern in a Class
+ * OOPSBannerApp UC8 - Render OOPS using Map and Function
  * <p>
- * This use case improves upon UC6 by encapsulating
- * character patterns inside a dedicated inner static class.
+ * Demonstrates centralized character pattern management
+ * using HashMap and dynamic banner rendering.
  *
  * @author seetharamaraju
- * @version 7
+ * @version 8
  */
 
 public class App {
     public static void main(String[] args) {
 
-        // Create character pattern objects
-        CharacterPattern o = new CharacterPattern('O', new String[]{
-                "*********",
-                "*       *",
-                "*       *",
-                "*       *",
-                "*       *",
-                "*       *",
-                "*********"
-        });
+        Map<Character, String[]> patternMap = loadCharacterPatterns();
 
-        CharacterPattern p = new CharacterPattern('P', new String[]{
-                "*********",
-                "*       *",
-                "*       *",
-                "*********",
-                "*        ",
-                "*        ",
-                "*        "
-        });
+        String word = "OOPS";
 
-        CharacterPattern s = new CharacterPattern('S', new String[]{
-                "*********",
-                "*        ",
-                "*        ",
-                "*********",
-                "        *",
-                "        *",
-                "*********"
-        });
-
-        // Store characters in array (O O P S)
-        CharacterPattern[] word = {o, o, p, s};
-
-        // Build banner line by line
-        for (int row = 0; row < 7; row++) {
-            StringBuilder line = new StringBuilder();
-            for (CharacterPattern cp : word) {
-                line.append(cp.getPattern()[row]).append("  ");
-            }
-            System.out.println(line);
-        }
+        renderBanner(word, patternMap);
     }
 
     /**
-     * Inner Static Class to encapsulate
-     * character and its banner pattern
+     * Builds and returns a Map of character patterns
+     *
+     * @return Map<Character, String [ ]>
      */
-    static class CharacterPattern {
+    private static Map<Character, String[]> loadCharacterPatterns() {
 
-        private final char character;
-        private final String[] pattern;
+        Map<Character, String[]> map = new HashMap<>();
 
-        /**
-         * Constructor to initialize character pattern
-         *
-         * @param character banner character
-         * @param pattern   7-line banner pattern
-         */
-        public CharacterPattern(char character, String[] pattern) {
-            this.character = character;
-            this.pattern = pattern;
-        }
+        map.put('O', new String[]{"*********", "*       *", "*       *", "*       *", "*       *", "*       *", "*********"});
 
-        /**
-         * @return character value
-         */
-        public char getCharacter() {
-            return character;
-        }
+        map.put('P', new String[]{"*********", "*       *", "*       *", "*********", "*        ", "*        ", "*        "});
 
-        /**
-         * @return banner pattern lines
-         */
-        public String[] getPattern() {
-            return pattern;
-        }
+        map.put('S', new String[]{"*********", "*        ", "*        ", "*********", "        *", "        *", "*********"});
+
+        return map;
     }
 
+    /**
+     * Renders the banner for a given word
+     *
+     * @param word       text to render
+     * @param patternMap character pattern repository
+     */
+    private static void renderBanner(String word, Map<Character, String[]> patternMap) {
+
+        for (int row = 0; row < 7; row++) {
+            StringBuilder line = new StringBuilder();
+
+            for (char ch : word.toCharArray()) {
+                line.append(patternMap.get(ch)[row]).append("  ");
+            }
+
+            System.out.println(line);
+        }
+    }
 }
