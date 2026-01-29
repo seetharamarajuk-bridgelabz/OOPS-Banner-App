@@ -1,55 +1,61 @@
 package org.example;
 
 /**
- * OOPSBannerApp UC2 - Render OOPS as Banner (spaces and *)
- * <p>
- * This Class demostrates the creation of ASSCII art banner using Object-Oriented Programming Principles
- * It extends the basic banner concept by displaying the word "OOPS" in a visual format using asterisks(*)
- * and spaces to form each letter
- * <p>
- * <p>
- * This Class demostrates a simple Java application that displays the object
- * Oriented Programming System OOPS acronym to the console.
+ * OOPSBannerApp UC3 – OOPS Banner Application (Use Case 3)
+ *
+ * This class extends the functionality of Use Case 2 by improving the way the "OOPS" banner
+ * is constructed and displayed. It focuses on enhancing code readability and efficiency
+ * by utilizing the String.join() method to create each line of the banner. This approach
+ * overcomes the drawbacks of using the + operator for string concatenation, which can lead
+ * to code inefficiency due to the creation of multiple intermediate String objects in memory.
  *
  * @author seetharamaraju
- * @version 2.0
+ * @version 3.0
  */
 
-/**
- *  Extend the User Story 1 to display the message "OOPS" in a banner format
- *  Using characters formed by spaces and asterisks(*) to create a visual
- *  effect for each letter in the message.
- */
+// Extend use case UC2 to use String.join() method to create each line of the "OOPS" banner
+// instead of concatenating strings with the + operator. This is essentially to overcome the
+// drawbacks of using the + operator for string concatenation which essentially creates
+// multiple intermediate String objects in memory leading to inefficiency.
 
+// Hint: Use String.join(" ", ...) to join the parts of each line with spaces.
 public class App {
     public static void main(String[] args) {
-        System.out.println(
-                " ******** " + "  ******** " + " ******** " + "  ********"
-        );
 
-        System.out.println(
-                "*        *" + " *        *" + " *       *" + " *        "
-        );
+        // Main method to run the banner display
+        // Use System.out.println() to print each line of the OOPS banner to create
+        // the visual effect for the message "OOPS". Construct each line using
+        // String.join() method for better readability and efficiency.
+        // Each line corresponds to a row in the banner for the letters O, O, P, S.
 
-        System.out.println(
-                "*        *" + " *        *" + " *       *" + " *        "
-        );
+        String line1 = String.join(" ",
+                "*********", "*********", "*********", "*********");
 
-        System.out.println(
-                "*        *" + " *        *" + " ******** " + "  ********"
-        );
+        String line2 = String.join(" ",
+                "*       *", "*       *", "*       *", "*        ");
 
-        System.out.println(
-                "*        *" + " *        *" + " *        " + "         *"
-        );
+        String line3 = String.join(" ",
+                "*       *", "*       *", "*       *", "*        ");
 
-        System.out.println(
-                "*        *" + " *        *" + " *        " + "         *"
-        );
+        String line4 = String.join(" ",
+                "*       *", "*       *", "*********", "*********");
 
-        System.out.println(
-                " ******** " + "  ******** " + " *        " + "  ********"
-        );
+        String line5 = String.join(" ",
+                "*       *", "*       *", "*        ", "        *");
+
+        String line6 = String.join(" ",
+                "*       *", "*       *", "*        ", "        *");
+
+        String line7 = String.join(" ",
+                "*********", "*********", "*        ", "*********");
+
+        System.out.println(line1);
+        System.out.println(line2);
+        System.out.println(line3);
+        System.out.println(line4);
+        System.out.println(line5);
+        System.out.println(line6);
+        System.out.println(line7);
 
     }
 }
