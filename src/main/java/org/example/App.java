@@ -1,42 +1,20 @@
 package org.example;
 
 /**
- * OOPSBannerApp UC6 - Refactor Banner Logic into Functions
+ * OOPSBannerApp UC7 - Store Character Pattern in a Class
  * <p>
- * This use case improves upon UC5 by extracting banner pattern logic
- * into reusable helper methods. This follows DRY, abstraction,
- * and modular design principles.
+ * This use case improves upon UC6 by encapsulating
+ * character patterns inside a dedicated inner static class.
  *
  * @author seetharamaraju
- * @version 6
+ * @version 7
  */
+
 public class App {
     public static void main(String[] args) {
 
-        // Get patterns for each character
-        String[] oPattern = getOPattern();
-        String[] pPattern = getPPattern();
-        String[] sPattern = getSPattern();
-
-        // Combine O O P S line by line
-        String[] bannerLines = new String[7];
-        for (int i = 0; i < 7; i++) {
-            bannerLines[i] = String.join("  ",
-                    oPattern[i],
-                    oPattern[i],
-                    pPattern[i],
-                    sPattern[i]);
-        }
-
-        // Print banner
-        for (String line : bannerLines) {
-            System.out.println(line);
-        }
-    }
-
-    // Helper method for letter O
-    private static String[] getOPattern() {
-        return new String[]{
+        // Create character pattern objects
+        CharacterPattern o = new CharacterPattern('O', new String[]{
                 "*********",
                 "*       *",
                 "*       *",
@@ -44,12 +22,9 @@ public class App {
                 "*       *",
                 "*       *",
                 "*********"
-        };
-    }
+        });
 
-    // Helper method for letter P
-    private static String[] getPPattern() {
-        return new String[]{
+        CharacterPattern p = new CharacterPattern('P', new String[]{
                 "*********",
                 "*       *",
                 "*       *",
@@ -57,12 +32,9 @@ public class App {
                 "*        ",
                 "*        ",
                 "*        "
-        };
-    }
+        });
 
-    // Helper method for letter S
-    private static String[] getSPattern() {
-        return new String[]{
+        CharacterPattern s = new CharacterPattern('S', new String[]{
                 "*********",
                 "*        ",
                 "*        ",
@@ -70,6 +42,54 @@ public class App {
                 "        *",
                 "        *",
                 "*********"
-        };
+        });
+
+        // Store characters in array (O O P S)
+        CharacterPattern[] word = {o, o, p, s};
+
+        // Build banner line by line
+        for (int row = 0; row < 7; row++) {
+            StringBuilder line = new StringBuilder();
+            for (CharacterPattern cp : word) {
+                line.append(cp.getPattern()[row]).append("  ");
+            }
+            System.out.println(line);
+        }
     }
+
+    /**
+     * Inner Static Class to encapsulate
+     * character and its banner pattern
+     */
+    static class CharacterPattern {
+
+        private final char character;
+        private final String[] pattern;
+
+        /**
+         * Constructor to initialize character pattern
+         *
+         * @param character banner character
+         * @param pattern   7-line banner pattern
+         */
+        public CharacterPattern(char character, String[] pattern) {
+            this.character = character;
+            this.pattern = pattern;
+        }
+
+        /**
+         * @return character value
+         */
+        public char getCharacter() {
+            return character;
+        }
+
+        /**
+         * @return banner pattern lines
+         */
+        public String[] getPattern() {
+            return pattern;
+        }
+    }
+
 }
